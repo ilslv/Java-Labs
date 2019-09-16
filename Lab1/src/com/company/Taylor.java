@@ -1,4 +1,8 @@
+package com.company;
+
 public class Taylor {
+
+    private static long factorialStep = 1;
 
     public static double calculate(int k, double x) {
         int i = 0;
@@ -12,14 +16,7 @@ public class Taylor {
     }
 
     private static double func(int step, double x) {
-        return Math.pow(x, step) / factorial(step);
-    }
-
-    private static long factorial(int n) {
-        long result = 1;
-        for(;n > 0; n--){
-            result *= n;
-        }
-        return result;
+        factorialStep *= step > 0 ? step : 1;
+        return Math.pow(x, step) / factorialStep;
     }
 }

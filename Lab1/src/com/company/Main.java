@@ -1,5 +1,5 @@
-import java.text.DecimalFormat;
-import java.text.NumberFormat;
+package com.company;
+
 import java.util.Scanner;
 
 public class Main {
@@ -18,6 +18,6 @@ public class Main {
             System.out.println("Error occurred while reading input!");
             return;
         }
-        System.out.printf("%.3f %.3f", Taylor.calculate(k, x), Math.pow(Math.E, x));
+        System.out.printf("Approximation:\t\t\t%.3f\nUsing math functions:\t%.3f", Taylor.calculate(k, x), Math.pow(Math.E, x));
     }
 }
