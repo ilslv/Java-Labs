@@ -1,9 +1,9 @@
 package com.company;
 
-import java.util.List;
+import java.util.Map;
 
 public class Session {
-    public List<Subjects> subjects;
+    public Map<Subjects, Integer> subjects;
 }
 
 enum Subjects{
