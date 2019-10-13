@@ -12,10 +12,10 @@ public class Main {
         ObjectInputStream ois = new ObjectInputStream(new FileInputStream("students.dat"));
         students = (List<Student>) ois.readObject();
 
-        printExcellentStudents(students, System.out);
-        printBadStudents(students, System.out);
-        sortByName(students, System.out);
-        sortByAverageMark(students, System.out);
+        printExcellentStudents(students, new FileOutputStream("excellentStudents.txt"));
+        printBadStudents(students, new FileOutputStream("badStudents.txt"));
+        sortByName(students, new FileOutputStream("sortedByNameStudents.txt"));
+        sortByAverageMark(students, new FileOutputStream("sortedByAverageMarkStudents.txt"));
     }
 
     public static void generateFile(List<Student> students) throws IOException {
