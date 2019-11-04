@@ -4,8 +4,6 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 public class Main {
@@ -22,7 +20,7 @@ public class Main {
     public static void main(String[] args) {
         String code = readFromFile("input.txt");
         System.out.println(
-                code.replaceAll("(\".*?\")|('.*?')|((//.*?\\n)|(/\\*(.|\\n)*?\\*/))", "$1$2")
+                code.replaceAll("(\".*?\")|('.*?')|((//.*?(?=\\n))|(/\\*(.|\\n)*?\\*/))", "$1$2")
         );
     }
 }
