@@ -61,13 +61,16 @@ public class Main {
                     int sizeOfElement = getSizeOfElement(array.group(1));
                     int size;
 
+                    //testing for one dimensional array initialized with {}
                     if (array.group(9) != null) {
+                        //getting all ',' and add 1
                         int numberOfElements = (int) array.group(9).chars().filter(ch -> ch == ',').count() + 1;
                         size = sizeOfArray(sizeOfElement, numberOfElements);
                     } else {
                         String arrayDimensions = array.group(5);
                         Stack<Integer> arrayDimsStack = new Stack<>();
 
+                        //filling stack with array dimensions
                         Pattern
                                 .compile("\\[\\s*(\\d+)\\s*]")
                                 .matcher(arrayDimensions)
