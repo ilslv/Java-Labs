@@ -53,21 +53,32 @@ public class Main {
         BufferedWriter output = new BufferedWriter(new FileWriter("arrays.out"));
 
         Pattern
-                .compile("(\\w+)(\\s*\\[\\s*])*\\s*(\\w+)(\\s*\\[\\s*])*\\s*=\\s*((new\\s*(\\w+)(\\s*\\[\\s*\\d+\\s*])+)|(\\{(.|\n)+}+))\\s*(?=;)")
+                .compile("(\\w++)\\s*(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+(\\w+)(\\s*\\[\\s*\\d+\\s*])+)|(\\{(.|)+}+))\\s*(?=;)")
                 .matcher(input)
                 .results()
                 .forEach(array -> {
-                    String arrayName = array.group(3);
+                    String arrayName = array.group(5) != null ? array.group(5) : array.group(7);
                     int sizeOfElement = getSizeOfElement(array.group(1));
                     int size;
 
                     //testing for one dimensional array initialized with {}
-                    if (array.group(9) != null) {
-                        //getting all ',' and add 1
-                        int numberOfElements = (int) array.group(9).chars().filter(ch -> ch == ',').count() + 1;
+                    if (array.group(13) != null) {
+                        //testing for single []
+                        if (Pattern.compile("\\[\\s*]").matcher(array.group(2)).results().count() != 1) {
+                            return;
+                        }
+
+                        //counting all ',' and adding 1
+                        int numberOfElements = (int) array.group(13).chars().filter(ch -> ch == ',').count() + 1;
                         size = sizeOfArray(sizeOfElement, numberOfElements);
                     } else {
-                        String arrayDimensions = array.group(5);
+                        //testing for equal number of [] in left and right sides
+                        if (Pattern.compile("\\[\\s*]").matcher(array.group(2)).results().count() !=
+                                Pattern.compile("\\[\\s*(\\d+)\\s*]").matcher(array.group(10)).results().count()) {
+                            return;
+                        }
+
+                        String arrayDimensions = array.group(10);
                         Stack<Integer> arrayDimsStack = new Stack<>();
 
                         //filling stack with array dimensions
@@ -80,7 +91,7 @@ public class Main {
                         size = sizeOfArray(sizeOfElement, arrayDimsStack.pop());
                         size = arrayDimsStack
                                 .stream()
-                                .reduce(size, (result, numberOfElements) -> (int) Math.ceil((numberOfElements * result + 28) / 8.) * 8);
+                                .reduce(size, (result, numberOfElements) -> sizeOfArray(numberOfElements, result));
                     }
 
                     try {
