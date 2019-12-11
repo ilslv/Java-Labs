@@ -1,19 +1,12 @@
 package com.company;
 
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayDeque;
-import java.util.List;
-import java.util.Queue;
 import java.util.Stack;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Stream;
 
 public class Main {
     public static String readFromFile(String filePath) throws IOException {
@@ -53,7 +46,7 @@ public class Main {
         BufferedWriter output = new BufferedWriter(new FileWriter("arrays.out"));
 
         Pattern
-                .compile("(\\w++)\\s*(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+(\\w+)(\\s*\\[\\s*\\d+\\s*])+)|(\\{(.|)+}+))\\s*(?=;)")
+                .compile("(\\w+)\\s+(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+(\\w+)(\\s*\\[\\s*\\d+\\s*])+)|(\\{\\s*\\w+\\s*(,\\s*\\w+\\s*)+\\s*}))\\s*(?=;)")
                 .matcher(input)
                 .results()
                 .forEach(array -> {
