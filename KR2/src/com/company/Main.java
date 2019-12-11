@@ -45,8 +45,7 @@ public class Main {
         String input = readFromFile("arrays.in");
         BufferedWriter output = new BufferedWriter(new FileWriter("arrays.out"));
 
-        Pattern
-                .compile("(\\w+)\\s+(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+(\\w+)(\\s*\\[\\s*\\d+\\s*])+)|(\\{\\s*\\w+\\s*(,\\s*\\w+\\s*)+\\s*}))\\s*(?=;)")
+        Pattern.compile("(\\w+)\\s+(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+(\\w+)(\\s*\\[\\s*\\d+\\s*])+)|(\\{\\s*\\w+\\s*(,\\s*\\w+\\s*)+\\s*}))\\s*(?=;)")
                 .matcher(input)
                 .results()
                 .forEach(array -> {
@@ -54,29 +53,29 @@ public class Main {
                     int sizeOfElement = getSizeOfElement(array.group(1));
                     int size;
 
-                    //testing for one dimensional array initialized with {}
-                    if (array.group(13) != null) {
-                        //testing for single []
-                        if (Pattern.compile("\\[\\s*]").matcher(array.group(2)).results().count() != 1) {
+                    String rightSide = array.group(13);
+                    String leftSide = array.group(2);
+                    if (rightSide != null) {
+                        int numberOfParenthesis = (int) Pattern.compile("\\[\\s*]").matcher(leftSide).results().count();
+                        if (numberOfParenthesis != 1) {
                             return;
                         }
 
-                        //counting all ',' and adding 1
-                        int numberOfElements = (int) array.group(13).chars().filter(ch -> ch == ',').count() + 1;
+                        int numberOfElements = (int) rightSide.chars().filter(ch -> ch == ',').count() + 1;
                         size = sizeOfArray(sizeOfElement, numberOfElements);
                     } else {
-                        //testing for equal number of [] in left and right sides
-                        if (Pattern.compile("\\[\\s*]").matcher(array.group(2)).results().count() !=
-                                Pattern.compile("\\[\\s*(\\d+)\\s*]").matcher(array.group(10)).results().count()) {
+                        rightSide = array.group(10);
+
+                        int rightSideParenthesis = (int) Pattern.compile("\\[\\s*(\\d+)\\s*]").matcher(rightSide).results().count();
+                        int leftSideParenthesis = (int) Pattern.compile("\\[\\s*]").matcher(leftSide).results().count();
+                        if (rightSideParenthesis != leftSideParenthesis) {
                             return;
                         }
 
                         String arrayDimensions = array.group(10);
                         Stack<Integer> arrayDimsStack = new Stack<>();
 
-                        //filling stack with array dimensions
-                        Pattern
-                                .compile("\\[\\s*(\\d+)\\s*]")
+                        Pattern.compile("\\[\\s*(\\d+)\\s*]")
                                 .matcher(arrayDimensions)
                                 .results()
                                 .forEach(dimension -> arrayDimsStack.push(Integer.valueOf(dimension.group(1))));
