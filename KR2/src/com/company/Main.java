@@ -45,7 +45,7 @@ public class Main {
         String input = readFromFile("arrays.in");
         BufferedWriter output = new BufferedWriter(new FileWriter("arrays.out"));
 
-        Pattern.compile("(\\w+)\\s+(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+(\\w+)(\\s*\\[\\s*\\d+\\s*])+)|(\\{\\s*\\w+\\s*(,\\s*\\w+\\s*)+\\s*}))\\s*(?=;)")
+        Pattern.compile("(\\w+)\\s+(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+\\1(\\s*\\[\\s*\\d+\\s*])+)|(\\{\\s*\\w+\\s*(,\\s*\\w+\\s*)*\\s*}))\\s*(?=;)")
                 .matcher(input)
                 .results()
                 .forEach(array -> {
@@ -53,7 +53,7 @@ public class Main {
                     int sizeOfElement = getSizeOfElement(array.group(1));
                     int size;
 
-                    String rightSide = array.group(13);
+                    String rightSide = array.group(12);
                     String leftSide = array.group(2);
                     if (rightSide != null) {
                         int numberOfParenthesis = (int) leftSide.chars().filter(c -> c == '[').count();
