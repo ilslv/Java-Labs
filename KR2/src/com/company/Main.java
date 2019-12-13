@@ -56,8 +56,8 @@ public class Main {
                     String rightSide = array.group(13);
                     String leftSide = array.group(2);
                     if (rightSide != null) {
-                        int numberOfParenthesis = (int) Pattern.compile("\\[\\s*]").matcher(leftSide).results().count();
-                        if (numberOfParenthesis != 1) {
+                        int numberOfParenthesis = (int) leftSide.chars().filter(c -> c == '[').count();
+                        if (numberOfParenthesis > 1) {
                             return;
                         }
 
@@ -66,17 +66,16 @@ public class Main {
                     } else {
                         rightSide = array.group(10);
 
-                        int rightSideParenthesis = (int) Pattern.compile("\\[\\s*(\\d+)\\s*]").matcher(rightSide).results().count();
-                        int leftSideParenthesis = (int) Pattern.compile("\\[\\s*]").matcher(leftSide).results().count();
+                        int rightSideParenthesis = (int) rightSide.chars().filter(c -> c == '[').count();
+                        int leftSideParenthesis = (int ) leftSide.chars().filter(c -> c == '[').count();
                         if (rightSideParenthesis != leftSideParenthesis) {
                             return;
                         }
 
-                        String arrayDimensions = array.group(10);
                         Stack<Integer> arrayDimsStack = new Stack<>();
 
                         Pattern.compile("\\[\\s*(\\d+)\\s*]")
-                                .matcher(arrayDimensions)
+                                .matcher(rightSide)
                                 .results()
                                 .forEach(dimension -> arrayDimsStack.push(Integer.valueOf(dimension.group(1))));
 
