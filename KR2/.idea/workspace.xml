@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="643dabb2-9358-4973-8828-a28c60868fca" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/arrays.out" beforeDir="false" afterPath="$PROJECT_DIR$/arrays.out" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/arrays.in" beforeDir="false" afterPath="$PROJECT_DIR$/arrays.in" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/company/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/company/Main.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -21,6 +21,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="last.edited.regexp" value="int [][]b = new int[100][100];" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -71,7 +72,7 @@
       <workItem from="1576004577872" duration="32000" />
       <workItem from="1576047462517" duration="786000" />
       <workItem from="1576055810629" duration="770000" />
-      <workItem from="1576238474574" duration="356000" />
+      <workItem from="1576238474574" duration="3004000" />
     </task>
     <servers />
   </component>
@@ -90,5 +91,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
+          <line>66</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
