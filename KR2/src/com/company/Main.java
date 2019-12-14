@@ -15,12 +15,12 @@ public class Main {
         return result.toString();
     }
 
-    public static int sizeOfArray(int sizeOfElement, int numberOfElements) {
-        return (int) Math.ceil((sizeOfElement * numberOfElements + 28) / 8.) * 8;
+    public static int sizeOfArray(int elementSize, int numberOfElements) {
+        return (int) Math.ceil((elementSize * numberOfElements + 28) / 8.) * 8;
     }
 
-    public static int getSizeOfElement(String str) {
-        int sizeOfElement = 0;
+    public static int getSizeOfElement(String str) throws RuntimeException {
+        int sizeOfElement;
         switch (str) {
             case ("byte"):
                 sizeOfElement = 1;
@@ -37,6 +37,8 @@ public class Main {
             case ("double"):
                 sizeOfElement = 8;
                 break;
+            default:
+                throw new RuntimeException("Type not found!");
         }
         return sizeOfElement;
     }
@@ -45,24 +47,31 @@ public class Main {
         String input = readFromFile("arrays.in");
         BufferedWriter output = new BufferedWriter(new FileWriter("arrays.out"));
 
-        Pattern.compile("(\\w+)\\s+(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+\\1(\\s*\\[\\s*\\d+\\s*])+)|(\\{\\s*\\w+\\s*(,\\s*\\w+\\s*)*\\s*}))\\s*(?=;)")
+        Pattern.compile("(\\w+)\\s+(((\\s*\\[\\s*])+\\s*(\\w+))|((\\w+)(\\s*\\[\\s*])+))\\s*=\\s*((new\\s+\\1(\\s*\\[\\s*\\d+\\s*])+)|(\\{\\s*\\w+\\s*(,\\s*\\d+\\s*)*\\s*}))\\s*(?=;)")
                 .matcher(input)
                 .results()
                 .forEach(array -> {
                     String arrayName = array.group(5) != null ? array.group(5) : array.group(7);
-                    int sizeOfElement = getSizeOfElement(array.group(1));
-                    int size;
-
                     String rightSide = array.group(12);
                     String leftSide = array.group(2);
+
+                    int size;
+                    int elementSize;
+
+                    try {
+                        elementSize = getSizeOfElement(array.group(1));
+                    } catch (RuntimeException e){
+                        return;
+                    }
+
                     if (rightSide != null) {
                         int numberOfParenthesis = (int) leftSide.chars().filter(c -> c == '[').count();
                         if (numberOfParenthesis > 1) {
                             return;
                         }
 
-                        int numberOfElements = (int) rightSide.chars().filter(ch -> ch == ',').count() + 1;
-                        size = sizeOfArray(sizeOfElement, numberOfElements);
+                        int numberOfElements = (int) rightSide.chars().filter(c -> c == ',').count() + 1;
+                        size = sizeOfArray(elementSize, numberOfElements);
                     } else {
                         rightSide = array.group(10);
 
@@ -79,10 +88,9 @@ public class Main {
                                 .results()
                                 .forEach(dimension -> arrayDimsStack.push(Integer.valueOf(dimension.group(1))));
 
-                        size = sizeOfArray(sizeOfElement, arrayDimsStack.pop());
                         size = arrayDimsStack
                                 .stream()
-                                .reduce(size, (result, numberOfElements) -> sizeOfArray(numberOfElements, result));
+                                .reduce(elementSize, Main::sizeOfArray);
                     }
 
                     try {
@@ -90,7 +98,6 @@ public class Main {
                     } catch (IOException e) {
                         e.printStackTrace();
                     }
-
                 });
 
         output.close();
