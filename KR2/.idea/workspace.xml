@@ -21,7 +21,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last.edited.regexp" value="int [][]b = new int[100][100];" />
+    <property name="last.edited.regexp" value="byte a[] = {1, 3, 4};" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -72,7 +72,9 @@
       <workItem from="1576004577872" duration="32000" />
       <workItem from="1576047462517" duration="786000" />
       <workItem from="1576055810629" duration="770000" />
-      <workItem from="1576238474574" duration="3004000" />
+      <workItem from="1576238474574" duration="3249000" />
+      <workItem from="1576249718027" duration="419000" />
+      <workItem from="1576307567853" duration="3064000" />
     </task>
     <servers />
   </component>
@@ -91,16 +93,5 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/com/company/Main.java</url>
-          <line>66</line>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
