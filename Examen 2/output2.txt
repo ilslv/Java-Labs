@@ -1,0 +1,34 @@
+C:\
+	$Recycle.Bin
+	$WINDOWS.~BT
+	Bonus
+	bootTel.dat
+	Documents and Settings
+	GOG Games
+	iMobie Temp
+	iMobieBackup
+	Intel
+	macOS
+	MinGW
+	pagefile.sys
+	PerfLogs
+	Program Files
+	Program Files (x86)
+	ProgramData
+	Recovery
+	Rtools
+	swapfile.sys
+	System Volume Information
+	Users
+	Windows
+	_1
+	_Activators
+	_Art
+	_C++
+	_Dev
+	_Java
+C:\_Java\Lab3
+	.git
+	.gitignore
+	Lab3
+	README.md

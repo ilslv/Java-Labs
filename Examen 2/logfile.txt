@@ -1,0 +1,6 @@
+cd..	-	fail
+cd   C:\_Java\Lab3\Lab3\src\com\company	-	success
+cd.. 	-	success
+cd..	-	success
+cd..   	-	success
+cd..	-	success
