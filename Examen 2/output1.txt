@@ -1,0 +1,8 @@
+dir
+dir
+cd..
+cd..
+cd..
+cd..
+cd..
+cd C:\_Java\Lab3\Lab3\src\com\company

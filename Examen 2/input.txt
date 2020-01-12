@@ -1,0 +1,2 @@
+cd..;dir ;cd   C:\_Java\Lab3\Lab3\src\com\company;
+cd.. ;cd..;cd..   ;cd..;dir;
